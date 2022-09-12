@@ -7,10 +7,12 @@ const Manager = require("./lib/Manager.js");
 // importing inquirer
 const inquirer = require("inquirer");
 
-e = new Employee("Jack",0,"jack@test.com");
-m = new Manager("John",1,"john@test.com",101);
-eng = new Engineer("Jason", 2, "jason@test.com", "jasonGit");
+employee = new Employee("Jack",0,"jack@test.com");
+manager = new Manager("John",1,"john@test.com",101);
+engineer = new Engineer("Jason", 2, "jason@test.com", "jasonGit");
+intern = new Intern("Jacqueline", 3, "jackie@test.com","Harvard");
 
-console.log(e.getName(),e.getId(),e.getEmail(),e.getRole());
-console.log(m.getName(),m.getId(),m.getEmail(),m.getRole(),m.officeNumber);
-console.log(eng.getName(),eng.getId(),eng.getEmail(),eng.getRole(),eng.getGithub());
+console.log(employee.getName(),employee.getId(),employee.getEmail(),employee.getRole());
+console.log(manager.getName(),manager.getId(),manager.getEmail(),manager.getRole(),manager.officeNumber);
+console.log(engineer.getName(),engineer.getId(),engineer.getEmail(),engineer.getRole(),engineer.getGithub());
+console.log(intern.getName(),intern.getId(),intern.getEmail(),intern.getRole(),intern.getSchool());
