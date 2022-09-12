@@ -7,4 +7,6 @@ const Manager = require("./lib/Manager.js");
 // importing inquirer
 const inquirer = require("inquirer");
 
-console.log("imported.");
+e = new Employee("Jack",0,"jack@test.com");
+
+console.log(e.getName(),e.getId(),e.getEmail());
