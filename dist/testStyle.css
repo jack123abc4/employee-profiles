@@ -1,0 +1,25 @@
+.jumbotron {
+    background-color: rgb(232,71,86);
+    color: white;
+}
+
+.card {
+    box-shadow: 5px 5px 5px black;
+}
+
+.card-top {
+    background-color: rgb(0,119,247);
+    color: white;
+    padding: 10px;
+    
+}
+
+.card-top p {
+    font-size: 150%;
+}
+
+.card-bottom {
+    padding:10px;
+    background-color: rgb(246,247,249);
+    border: 1px solid black;
+}

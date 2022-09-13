@@ -19,47 +19,147 @@ let employeeList = [];
 // console.log(engineer.getName(),engineer.getId(),engineer.getEmail(),engineer.getRole(),engineer.getGithub());
 // console.log(intern.getName(),intern.getId(),intern.getEmail(),intern.getRole(),intern.getSchool());
 
-async function createManager() {
+async function promptUser(questions) {
     // name, email, officenumber
-    let m;
-    await inquirer.prompt([
-    {
-        type: "input",
-        message: "What is the manager's name?",
-        name: "name",
-    },
-    {
-        type: "input",
-        message: "What is the manager's email?",
-        name: "email",
-    },
-    {
-        type: "input",
-        message: "What is the manager's office number?",
-        name: "officeNum",
-    },
-    ])
+    let e;
+    await inquirer.prompt(questions)
     .then((response) => {
-        // console.log(response);
-        m = new Manager(response.name, employeeList.length, response.email, response.officeNum)
-        employeeList.push(m);
-        // console.log("list:",employeeList);
+        e = response;
     }
     );
-    return Promise.resolve(m);
+    return Promise.resolve(e);
 }
 
-function createEngineer() {
+async function createManager() {
+    const questions = [
+        {
+            type: "input",
+            message: "What is the manager's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the manager's email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the manager's office number?",
+            name: "officeNum",
+        },
+    ]
+    const response = await promptUser(questions);
+    const man = new Manager(response.name, employeeList.length, response.email, response.officeNum);
+    employeeList.push(man);
+    return Promise.resolve(man);
+}
+
+async function createEngineer() {
     // name, email, github
+    const questions = [
+        {
+            type: "input",
+            message: "What is the engineer's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the engineer's email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the engineer's github?",
+            name: "github",
+        },
+    ]
+    const response = await promptUser(questions);
+    const eng = new Engineer(response.name, employeeList.length, response.email, response.github);
+    employeeList.push(eng);
+    return Promise.resolve(eng);
 }
 
-function createIntern() {
+async function createIntern() {
     // name, email, school
+    const questions = [
+        {
+            type: "input",
+            message: "What is the intern's name?",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "What is the intern's email?",
+            name: "email",
+        },
+        {
+            type: "input",
+            message: "What is the intern's school?",
+            name: "school",
+        },
+    ]
+    const response = await promptUser(questions);
+    const intern = new Intern(response.name, employeeList.length, response.email, response.school);
+    employeeList.push(intern);
+    return Promise.resolve(intern);
+}
+
+async function createEmployee(type) {
+    switch(type) {
+        case "manager":
+            await createManager();
+            break;
+        case "engineer":
+            await createEngineer();
+            break;
+        case "intern":
+            await createIntern();
+            break;
+    }
+    promptContinue();
+
+}
+
+function promptContinue() {
+    console.log("Current employee list:", employeeList);
+    inquirer.prompt(
+        {
+            type: "confirm",
+            message: "Would you like to add another employee?",
+            name: "userContinue",
+        }
+    )
+    .then((response) => { 
+        //console.log("promptContinue response was",response);
+        if (response.userContinue) {
+            askEmployee();
+        }
+    }
+    );
+}
+
+function askEmployee() {
+    inquirer.prompt(
+        {
+            type: "list",
+            name: "employeeType",
+            message: "What kind of employee would you like to add?",
+            choices: ["engineer", "intern"]
+        }
+    )
+    .then((response) => {
+        //console.log("askEmployee response was",response);
+        createEmployee(response.employeeType);
+})
 }
 
 async function main() {
-    const myManager = await createManager();
-    console.log(myManager);
+    console.log("Welcome! To begin setting up your team, please create a manager profile.");
+
+    const myManager = await createManager("manager");
+    console.log("Thank you for setting up your manager profile!");
+    promptContinue();
 }
+
 
 main();
