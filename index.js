@@ -19,9 +19,10 @@ let employeeList = [];
 // console.log(engineer.getName(),engineer.getId(),engineer.getEmail(),engineer.getRole(),engineer.getGithub());
 // console.log(intern.getName(),intern.getId(),intern.getEmail(),intern.getRole(),intern.getSchool());
 
-function createManager() {
+async function createManager() {
     // name, email, officenumber
-    inquirer.prompt([
+    let m;
+    await inquirer.prompt([
     {
         type: "input",
         message: "What is the manager's name?",
@@ -39,12 +40,13 @@ function createManager() {
     },
     ])
     .then((response) => {
-        console.log(response);
-        employeeList.push(new Manager(response.name, employeeList.length, response.email, response.officeNum));
-        console.log("list:",employeeList);
-        createManager();
+        // console.log(response);
+        m = new Manager(response.name, employeeList.length, response.email, response.officeNum)
+        employeeList.push(m);
+        // console.log("list:",employeeList);
     }
     );
+    return Promise.resolve(m);
 }
 
 function createEngineer() {
@@ -55,4 +57,9 @@ function createIntern() {
     // name, email, school
 }
 
-createManager();
+async function main() {
+    const myManager = await createManager();
+    console.log(myManager);
+}
+
+main();
