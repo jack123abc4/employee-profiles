@@ -179,7 +179,7 @@ function createHTML() {
     "sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
                  crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Title</title>
+    <title>Employee Team Profiles</title>
     </head>
     <header>
         <div class="jumbotron jumbotron-fluid text-center">
@@ -276,7 +276,7 @@ function createCard(employee) {
             extraAttribute = `Office #: ${employee.getOfficeNumber()}`;
             break;
         case "Engineer":
-            extraAttribute = `Github: ${employee.getGithub()}`;
+            extraAttribute = `Github: <a href="https://github.com/${employee.getGithub()}">${employee.getGithub()}</a>`;
             break;
         case "Intern":
             extraAttribute = `School: ${employee.getSchool()}`;
@@ -294,7 +294,7 @@ function createCard(employee) {
                         <div class="card-bottom">
                             <ul class="list-group list-group-flush card-list">
                             <li class="list-group-item">ID: ${employee.id}</li>
-                            <li class="list-group-item">Email: ${employee.email}</li>
+                            <li class="list-group-item">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
                             <li class="list-group-item">${extraAttribute}</li>
                             </ul>
                         </div>
