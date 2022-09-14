@@ -15,8 +15,8 @@ npm install
 
 This program can be used from the terminal. After installing the appropriate dependencies, a user can navigate the given prompts and input chosen data. From there, an HTML page with a corresponding stylesheet will be generated, which can be viewed in any browser.
 
-![image](.\assets\images\screenshot.PNG)
-![image](.\assets\images\screenshot2.PNG)
+![image](/assets/images/screenshot.PNG)
+![image](/assets/images/screenshot2.PNG)
 
 ## Credits
 
